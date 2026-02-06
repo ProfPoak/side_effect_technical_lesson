@@ -17,10 +17,20 @@ function App() {
     })
     .catch(error => console.error("Error fetching user:", error))
   }, [])
+  useEffect(() => {
+    const handleWindowClick = () => {
+      console.log("Window was clicked!")
+    }
+    window.addEventListener("click", handleWindowClick)
+
+    return () => {
+      window.removeEventListener("click", handleWindowClick)
+    }
+  },[])
 
   return (
     <div>
-      <h1>Hello, {useName}!</h1>
+      <h1>Hello, {userName}!</h1>
       <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
       {userData && (
         <div>
